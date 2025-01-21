@@ -51,4 +51,3 @@ then
 else
     echo -e "MySQL Root password already setup ... $Y SKIPPING $N"
 fi
-# mysql_secure_installation --set-root-pass ExpenseApp@1 -e show databases; &>>$LOG_FILE_NAME
