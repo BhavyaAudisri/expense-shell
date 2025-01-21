@@ -43,6 +43,7 @@ systemctl start nginx &>>$LOG_FILE_NAME
     VALIDATE $? " starting nginx "
 
 rm -rf /usr/share/nginx/html/*
+    VALIDATE $? "Removing existing version of code"
 
 curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip &>>$LOG_FILE_NAME
     VALIDATE $? " downloading the code "
