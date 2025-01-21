@@ -32,13 +32,13 @@ echo "Script started executing at: $TIMESTAMP" &>>$LOG_FILE_NAME
 
 CHECK_ROOT
 
-dnf module disable nodejs -y
+dnf module disable nodejs -y &>>$LOG_FILE_NAME
     validate $? " disable nodejs old version " &>>$LOG_FILE_NAME
 
-dnf module enable nodejs:20 -y
+dnf module enable nodejs:20 -y &>>$LOG_FILE_NAME
     validate $? " enable node js version 20 " &>>$LOG_FILE_NAME
 
-dnf install nodejs -y
+dnf install nodejs -y &>>$LOG_FILE_NAME
     validate $? " installing node js " &>>$LOG_FILE_NAME
 
 id expense &>>$LOG_FILE_NAME
