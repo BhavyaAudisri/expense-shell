@@ -32,7 +32,7 @@ echo "Script started executing at: $TIMESTAMP" &>>$LOG_FILE_NAME
 
 CHECK_ROOT
 
-dnf install mysql-server -y
+dnf install mysql-server -y &>>$LOG_FILE_NAME
     validate $? " installing mysql " &>>$LOG_FILE_NAME
 
 systemctl enable mysqld &>>$LOG_FILE_NAME
@@ -41,7 +41,7 @@ systemctl enable mysqld &>>$LOG_FILE_NAME
 systemctl start mysqld &>>$LOG_FILE_NAME
     VALIDATE $? "Starting MySQL Server"
 
-mysql -h mysql.somisettibhavya.life -u root -pExpenseApp@1 -e show databases; &>>$LOG_FILE_NAME
+mysql -h mysql.somisettibhavya.life -u root -pExpenseApp@1 -e ; 'show databases'; &>>$LOG_FILE_NAME
 
 if [ $? -ne 0 ]
 then
