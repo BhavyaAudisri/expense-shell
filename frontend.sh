@@ -32,20 +32,25 @@ echo "Script started executing at: $TIMESTAMP" &>>$LOG_FILE_NAME
 
 CHECK_ROOT
 
-dnf install nginx -y 
+dnf install nginx -y  &>>$LOG_FILE_NAME
     validate $? " installing nginx "
 
-systemctl enable nginx
+systemctl enable nginx &>>$LOG_FILE_NAME
     validate $? " enabling nginx "
 
-systemctl start nginx
+systemctl start nginx &>>$LOG_FILE_NAME
     validate $? " starting nginx "
 
 rm -rf /usr/share/nginx/html/*
 
-curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip &>>$LOG_FILE_NAME
+    validate $? " downloading the code "
 
 cd /usr/share/nginx/html
-unzip /tmp/frontend.zip
+unzip /tmp/frontend.zip &>>$LOG_FILE_NAME
+    validate $? " unzip frontend "
 
-cp /home/ec2-user/expense-shell /etc/nginx/default.d/expense.conf
+cp /home/ec2-user/expense-shell/expense.conf /etc/nginx/default.d/expense.conf 
+
+systemctl restart nginx &>>$LOG_FILE_NAME
+    validate $? " restart the nginx server "
